@@ -12,7 +12,11 @@ app.get("/", (req, res) => {
 });
 
 app.get("/download/:filename", (req, res) => {
-   res.send(`Filename is ${req.params["filename"]}`);
+   res.send(`Download Filename is ${req.params["filename"]}`);
+});
+
+app.get("/upload/:filename", (req, res) => {
+    res.send(`Upload Filename is ${req.params["filename"]}`);
 });
 
 server.listen(8080, "0.0.0.0", () => {
