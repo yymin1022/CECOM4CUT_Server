@@ -8,7 +8,7 @@ dotenv.config();
 const app = express();
 const server = http.createServer(app);
 
-const FILE_DIR = "/Data";
+const FILE_DIR = process.env.FILE_DIR;
 
 app.use(cors());
 
