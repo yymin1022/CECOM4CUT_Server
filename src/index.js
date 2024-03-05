@@ -13,7 +13,7 @@ const FILE_DIR = process.env.FILE_DIR;
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, FILE_DIR;
+        cb(null, FILE_DIR);
     },
     filename: function (req, file, cb) {
         cb(null, file.originalname);
@@ -34,8 +34,9 @@ app.get("/download/:filename", (req, res) => {
     res.download(FILE_FULL_DIR);
 });
 
-app.get("/upload/:filename", (req, res) => {
-    res.send(`Upload Filename is ${req.params["filename"]}`);
+app.post("/upload", upload.single("file"), (req, res) => {
+    res.send("Upload File");
+    console.log(req.file);
 });
 
 server.listen(8080, "0.0.0.0", () => {
