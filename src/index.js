@@ -5,6 +5,8 @@ import http from "http";
 const app = express();
 const server = http.createServer(app);
 
+const FILE_DIR = "/Data/";
+
 app.use(cors());
 
 app.get("/", (req, res) => {
