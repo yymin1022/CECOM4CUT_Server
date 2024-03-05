@@ -5,7 +5,7 @@ import http from "http";
 const app = express();
 const server = http.createServer(app);
 
-const FILE_DIR = "/Data/";
+const FILE_DIR = "/Data";
 
 app.use(cors());
 
@@ -14,7 +14,10 @@ app.get("/", (req, res) => {
 });
 
 app.get("/download/:filename", (req, res) => {
-   res.send(`Download Filename is ${req.params["filename"]}`);
+    const FILE_NAME = req.params["filename"];
+    const FILE_FULL_DIR = `${FILE_DIR}/${FILE_NAME}`;
+
+    res.download(FILE_FULL_DIR);
 });
 
 app.get("/upload/:filename", (req, res) => {
