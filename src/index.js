@@ -8,7 +8,7 @@ const server = http.createServer(app);
 app.use(cors());
 
 app.get("/", (req, res) => {
-    res.send("Hello, World!");
+    res.redirect("https://cecom.dev");
 });
 
 server.listen(8080, "0.0.0.0", () => {
