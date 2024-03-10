@@ -2,7 +2,7 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import http from "http";
-import multer from "multer";
+import {writeFileSync} from "fs";
 
 dotenv.config();
 
@@ -10,16 +10,6 @@ const app = express();
 const server = http.createServer(app);
 
 const FILE_DIR = process.env.FILE_DIR;
-
-const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, FILE_DIR);
-    },
-    filename: function (req, file, cb) {
-        cb(null, file.originalname);
-    }
-});
-const upload = multer({ storage: storage });
 
 app.use(cors());
 app.use(express.json());
@@ -35,9 +25,14 @@ app.get("/download/:filename", (req, res) => {
     res.download(FILE_FULL_DIR);
 });
 
-app.post("/upload", upload.single("file"), (req, res) => {
-    res.send("Upload File");
-    console.log(req.body);
+app.post("/upload", (req, res) => {
+    const FILE_DATA = req.body["file"];
+    const FILE_NAME = "file.jpg";
+
+    const IMAGE_FILE = Buffer.from(FILE_DATA, "base64");
+    writeFileSync(`${FILE_DIR}/${FILE_NAME}`, IMAGE_FILE);
+
+    res.send(FILE_NAME);
 });
 
 server.listen(8080, "0.0.0.0", () => {
