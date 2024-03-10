@@ -36,7 +36,6 @@ app.get("/download/:filename", (req, res) => {
 
 app.post("/upload", upload.single("file"), (req, res) => {
     res.send("Upload File");
-    console.log(req.file);
     console.log(req.body);
 });
 
