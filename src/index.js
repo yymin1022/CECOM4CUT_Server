@@ -26,21 +26,13 @@ app.get("/download/:filename", (req, res) => {
 });
 
 app.post("/upload", (req, res) => {
-    const DATE = new Date();
-    const DATE_MONTH = ('0' + (DATE.getMonth() + 1)).slice(-2);
-    const DATE_DAY = ('0' + DATE.getDate()).slice(-2);
-    const DATE_HOUR = ('0' + DATE.getHours()).slice(-2);
-    const DATE_MINUTE = ('0' + DATE.getMinutes()).slice(-2);
-    const DATE_SECOND = ('0' + DATE.getSeconds()).slice(-2);
-    const CUR_DATE = `${DATE_MONTH}${DATE_DAY}${DATE_HOUR}${DATE_MINUTE}${DATE_SECOND}`;
-
     const FILE_DATA = req.body["file"];
-    const FILE_NAME = `${CUR_DATE}.jpg`;
+    const FILE_NAME = req.body["filename"];
 
     const IMAGE_FILE = Buffer.from(FILE_DATA, "base64");
     writeFileSync(`${FILE_DIR}/${FILE_NAME}`, IMAGE_FILE);
 
-    res.send(CUR_DATE);
+    res.send(FILE_NAME);
 });
 
 server.listen(8080, "0.0.0.0", () => {
