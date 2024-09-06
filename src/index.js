@@ -12,7 +12,7 @@ const server = http.createServer(app);
 const FILE_DIR = process.env.FILE_DIR;
 
 app.use(cors());
-app.use(express.json());
+app.use(express.json({limit: '100mb'}));
 
 app.get("/", (req, res) => {
     res.redirect("https://cecom.dev");
