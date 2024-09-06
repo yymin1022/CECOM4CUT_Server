@@ -20,9 +20,9 @@ app.get("/", (req, res) => {
 
 app.get("/download/:filename", (req, res) => {
     const FILE_NAME = req.params["filename"];
-    const FILE_FULL_DIR = `${FILE_DIR}/${FILE_NAME}.jpg`;
+    const FILE_PATH = `${FILE_DIR}/${FILE_NAME}.jpg`;
 
-    res.download(FILE_FULL_DIR);
+    res.download(FILE_PATH);
 });
 
 app.post("/upload", (req, res) => {
