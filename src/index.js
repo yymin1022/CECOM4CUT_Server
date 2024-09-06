@@ -18,7 +18,7 @@ app.get("/", (req, res) => {
     res.redirect("https://cecom.dev");
 });
 
-app.get("/download/:filename", (req, res) => {
+app.get("/download/result/:filename", (req, res) => {
     const FILE_NAME = req.params["filename"];
     const FILE_PATH = `${FILE_DIR}/${FILE_NAME}.jpg`;
 
